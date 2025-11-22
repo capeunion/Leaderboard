@@ -56,19 +56,6 @@
             line-height: 1;
         }
 
-        /* Responsive Title: Hide text on mobile, keep emojis */
-        @media (max-width: 768px) {
-            .title-text {
-                display: none;
-            }
-            h1 {
-                font-size: 1.8em; /* Adjust emoji size slightly */
-            }
-            .trophy-icon {
-                margin-right: 5px;
-            }
-        }
-
         .last-updated { 
             font-size: 0.9em; 
             color: #888; 
