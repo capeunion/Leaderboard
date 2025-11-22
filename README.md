@@ -293,7 +293,7 @@
         // 🚨 CRITICAL STEP: REPLACE THIS PLACEHOLDER 🚨
         // This MUST be the published CSV link from your Google Sheet.
         // E.g., https://docs.google.com/spreadsheets/d/e/LONG_ID_STRING/pub?output=csv
-        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTrdPsAo1CJyqCRdqVlzl9_I-dVaTiViT-HhxG03JCwxGY2KaGIWpMwcQIlw_S-6jIBybp7c07_XHFW/pub?output=csv"; 
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTrdPsAo1CJyqCRdqVlzl9_I-dVaTiViT-HhxG03JCwxGY2KaGIWpMwcQIlw_S-6jIBybp7c07_XHFW/pub?gid=735304327&single=true&output=csv"; 
 
         // Interval for checking the sheet for updates (in milliseconds).
         const REFRESH_INTERVAL = 30000; // 30 seconds
