@@ -20,7 +20,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            min-height: 100vh; /* Ensure footer reaches bottom for visual placement */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -30,11 +30,10 @@
             margin-bottom: 20px;
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 10px;
-            display: block; /* Use block for simpler centering */
+            display: block;
         }
         
         .header-top {
-            /* Now only responsible for centering the H1 */
             width: 100%;
             display: flex;
             justify-content: center;
@@ -57,7 +56,19 @@
             line-height: 1;
         }
 
-        /* Updated message styling for the footer */
+        /* Responsive Title: Hide text on mobile, keep emojis */
+        @media (max-width: 768px) {
+            .title-text {
+                display: none;
+            }
+            h1 {
+                font-size: 1.8em; /* Adjust emoji size slightly */
+            }
+            .trophy-icon {
+                margin-right: 5px;
+            }
+        }
+
         .last-updated { 
             font-size: 0.9em; 
             color: #888; 
@@ -78,7 +89,6 @@
             text-align: center;
         }
 
-        /* Selection Containers and Grid take up flexible space */
         main {
             flex-grow: 1;
         }
@@ -230,9 +240,9 @@
     <header>
         <div class="header-top">
             <h1 id="main-title">
-                <!-- Trophy Emoji as requested -->
                 <span class="trophy-icon">🏆</span>
-                TEAM PERFORMANCE LEADERS ⚾
+                <!-- Text wrapped in span to control mobile visibility -->
+                <span class="title-text">Competition Results</span> ⚾
             </h1>
         </div>
         <div id="error-message"></div>
@@ -262,7 +272,7 @@
         </div>
     </main>
     
-    <!-- Updated message moved to footer -->
+    <!-- Updated message in footer -->
     <footer>
         <div class="last-updated" id="last-update">Updating...</div>
     </footer>
