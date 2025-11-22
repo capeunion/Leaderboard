@@ -20,6 +20,9 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
+            min-height: 100vh; /* Ensure footer reaches bottom for visual placement */
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -27,21 +30,39 @@
             margin-bottom: 20px;
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: block; /* Use block for simpler centering */
         }
         
         .header-top {
+            /* Now only responsible for centering the H1 */
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
-        h1 { margin: 0; font-size: 2.5em; text-transform: uppercase; letter-spacing: 2px; }
-        .last-updated { font-size: 0.9em; color: #888; }
+        h1 { 
+            margin: 0; 
+            font-size: 2.5em; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
         
+        .trophy-icon { 
+            margin-right: 15px; 
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* Updated message styling for the footer */
+        .last-updated { 
+            font-size: 0.9em; 
+            color: #888; 
+        }
+
         #error-message { 
             color: #ff4d4d; 
             font-size: 1.1em; 
@@ -51,7 +72,15 @@
             background: #440000;
             border-radius: 5px;
             width: 90%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
+        }
+
+        /* Selection Containers and Grid take up flexible space */
+        main {
+            flex-grow: 1;
         }
 
         /* Selection Containers */
@@ -186,6 +215,13 @@
             background: #252525; 
             border-radius: 10px;
         }
+        
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+        }
 
     </style>
 </head>
@@ -193,34 +229,43 @@
 
     <header>
         <div class="header-top">
-            <div class="last-updated" id="last-update">Updating...</div>
-            <h1 id="main-title">🔎 Team Performance Details</h1>
-            <div><!-- Spacer --></div>
+            <h1 id="main-title">
+                <!-- Trophy Emoji as requested -->
+                <span class="trophy-icon">🏆</span>
+                TEAM PERFORMANCE LEADERS ⚾
+            </h1>
         </div>
         <div id="error-message"></div>
     </header>
     
-    <div id="selection-controls">
-        <!-- Team Selector (Single Select - Radio Buttons) -->
-        <div class="selector-container">
-            <h3 style="margin-top:0; font-size:1.2em; border-bottom: 1px solid #4a4a4a; padding-bottom: 5px;">Select One Team:</h3>
-            <div class="selector-options" id="team-selector">
-                <!-- Team radio buttons inserted here -->
+    <main>
+        <div id="selection-controls">
+            <!-- Team Selector (Single Select - Radio Buttons) -->
+            <div class="selector-container">
+                <h3 style="margin-top:0; font-size:1.2em; border-bottom: 1px solid #4a4a4a; padding-bottom: 5px;">Select One Team:</h3>
+                <div class="selector-options" id="team-selector">
+                    <!-- Team radio buttons inserted here -->
+                </div>
+            </div>
+
+            <!-- Week Selector (Multi-Select - Checkboxes) -->
+            <div class="selector-container">
+                <h3 style="margin-top:0; font-size:1.2em; border-bottom: 1px solid #4a4a4a; padding-bottom: 5px;">Select Weeks to View:</h3>
+                <div class="selector-options" id="week-selector">
+                    <!-- Week checkboxes inserted here -->
+                </div>
             </div>
         </div>
 
-        <!-- Week Selector (Multi-Select - Checkboxes) -->
-        <div class="selector-container">
-            <h3 style="margin-top:0; font-size:1.2em; border-bottom: 1px solid #4a4a4a; padding-bottom: 5px;">Select Weeks to View:</h3>
-            <div class="selector-options" id="week-selector">
-                <!-- Week checkboxes inserted here -->
-            </div>
+        <div class="grid-container" id="leaderboard-grid">
+            <div class="no-selection-msg">Please select a team and one or more weeks above to see the detailed performance report.</div>
         </div>
-    </div>
-
-    <div class="grid-container" id="leaderboard-grid">
-        <div class="no-selection-msg">Please select a team and one or more weeks above.</div>
-    </div>
+    </main>
+    
+    <!-- Updated message moved to footer -->
+    <footer>
+        <div class="last-updated" id="last-update">Updating...</div>
+    </footer>
 
     <script>
         // Set up variables for global access in the script
@@ -250,6 +295,9 @@
         
         // --- LOCAL STORAGE FUNCTIONS ---
         function loadSelections() {
+            // Note: Since we are using local storage, we should initialize the app
+            // with a unique key based on the app's context, but for simplicity here, 
+            // we use hardcoded keys.
             const savedTeam = localStorage.getItem('detailedViewSelectedTeam');
             const savedWeeks = localStorage.getItem('detailedViewSelectedWeeks');
 
